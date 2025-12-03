@@ -85,14 +85,21 @@ export const analyzePdf = async (base64Data: string, apiKey: string): Promise<An
       config: {
         responseMimeType: "application/json",
         responseSchema: analysisSchema,
-        temperature: 0.2, // Low temperature for more factual extraction
       },
     });
 
-    const text = response.text;
+    let text = response.text;
     if (!text) {
       throw new Error("No response from Gemini.");
     }
+
+    // Clean up potential Markdown code blocks (```json ... ```)
+    if (text.includes("```")) {
+      text = text.replace(/```json/g, "").replace(/```/g, "");
+    }
+    
+    // Trim whitespace
+    text = text.trim();
 
     return JSON.parse(text) as AnalysisResult;
   } catch (error) {
