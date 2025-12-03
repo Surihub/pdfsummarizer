@@ -1,0 +1,5 @@
+{
+  "name": "PDF Insight Scanner",
+  "description": "PDF 문서를 업로드하면 AI가 문서를 스캔하여 장(Chapter)별로 내용을 요약하고 표로 정리해주는 스마트 분석 도구입니다.",
+  "requestFramePermissions": []
+}
